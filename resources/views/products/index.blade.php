@@ -45,11 +45,14 @@
                                 <td class="p-2 border space-x-2">
                                     <a href="{{ route('products.show', $product->id) }}" class="text-blue-600">Lihat</a>
                                     <a href="{{ route('products.edit', $product->id) }}" class="text-yellow-600">Edit</a>
+                                    
+                                    @role('admin')
                                     <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="inline" onsubmit="return confirm('Yakin hapus?')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-red-600">Hapus</button>
                                     </form>
+                                    @endrole
                                 </td>
                             </tr>
                         @empty
