@@ -9,7 +9,7 @@
         <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
 
-                <form action="{{ route('products.update', $product->id) }}" method="POST" class="space-y-4">
+                <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data class="space-y-4">
                     @csrf
                     @method('PUT')
 
@@ -35,6 +35,17 @@
                         <label class="block font-medium text-sm text-gray-700">Stok</label>
                         <input type="number" name="stok" value="{{ old('stok', $product->stok) }}" class="border-gray-300 rounded-md w-full">
                         @error('stok') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
+                    </div>
+
+                    <div>
+                        <label class="block font-medium text-sm text-gray-700">Gambar Produk</label>
+
+                        @if ($product->getFirstMediaUrl('images'))
+                            <img src="{{ $product->getFirstMediaUrl('images') }}" class="w-24 h-24 object-cover rounded mb-2">
+                        @endif
+
+                        <input type="file" name="gambar" class="border-gray-300 rounded-md w-full">
+                        @error('gambar') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
                     </div>
 
                     <div class="flex items-center gap-4">

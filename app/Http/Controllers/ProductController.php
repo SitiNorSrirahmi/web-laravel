@@ -49,7 +49,7 @@ class ProductController extends Controller
             if ($request->hasFile('gambar')) {
                 $product->addMedia($request->file('gambar'))->toMediaCollection('images');
             }
-            
+
             DB::commit();
 
             return redirect()->route('products.index')->with('success', 'Produk berhasil ditambahkan');
@@ -86,11 +86,17 @@ class ProductController extends Controller
             'deskripsi' => 'nullable|string',
             'harga' => 'required|integer|min:0',
             'stok' =>'required|integer|min:0',
+            'gambar' => 'nullable|image|max:2048',
         ]);
 
-        DB::beginTransaction();
-        try {
-            $product->update($validated);
+         DB::beginTransaction();
+    try {
+        $product->update($validated);
+
+        if ($request->hasFile('gambar')) {
+            $product->clearMediaCollection('images');
+            $product->addMedia($request->file('gambar'))->toMediaCollection('images');
+        }
             DB::commit();
 
         return redirect()->route('products.index')->with('success', 'Produk berhasil diperbarui');

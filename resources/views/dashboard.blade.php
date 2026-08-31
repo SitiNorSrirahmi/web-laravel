@@ -32,6 +32,16 @@
                     </svg>
                 </a>
             </div>
+
+            {{-- Statistik Cards --}}
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+                <x-stat-card title="Total Produk" :value="$totalProduk" color="blue" />
+                <x-stat-card title="Total Order" :value="$totalOrder" color="blue" />
+                <x-stat-card title="Stok Menipis" :value="$stokMenipis" color="red" />
+                <x-stat-card title="Total Pendapatan" value="Rp{{ number_format($totalPendapatan) }}" color="green" />
+                <x-stat-card title="Order Pending" :value="$orderPending" color="yellow" />
+            </div>
+
         </div>
     </div>
 </x-app-layout>

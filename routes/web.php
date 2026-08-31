@@ -3,14 +3,26 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
+use App\Models\Product;
+use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
-    return view('landing');
+    return view('landing', [
+        'produkTerbaru' => Product::latest()->take(4)->get(),
+    ]);
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard', [
+        'totalProduk' => Product::count(),
+        'totalOrder' => Order::count(),
+        'stokMenipis' => Product::where('stok', '<', 10)->count(),
+        'totalPendapatan' => OrderItem::sum(DB::raw('qty * harga_satuan')),
+        'orderPending' => Order::where('status', 'pending')->count(),
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

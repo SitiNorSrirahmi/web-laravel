@@ -69,23 +69,20 @@
         <!-- Signature: kartu stok mini -->
         <div class="w-full max-w-sm border border-[#DAD3C0] dark:border-[#3E3E3A] rounded-sm bg-white/60 dark:bg-white/5 mt-4 text-left">
             <div class="px-4 py-3 border-b border-[#DAD3C0] dark:border-[#3E3E3A] flex justify-between items-baseline">
-                <span class="font-display italic text-sm">Kartu Stok</span>
+                <span class="font-display  text-sm">Kartu Stok</span>
                 <span class="font-mono text-[10px] text-[#706f6c] dark:text-[#A1A09A]">Live</span>
             </div>
             <div class="divide-y divide-[#DAD3C0] dark:divide-[#3E3E3A]">
-                @php
-                    $rows = [
-                        ['Popok Celana XXL', '138'],
-                        ['Susu Formula 800g', '76'],
-                        ['Vitamin C 500mg', '412'],
-                    ];
-                @endphp
-                @foreach ($rows as $row)
-                    <div class="px-4 py-2.5 flex justify-between items-center text-sm">
-                        <span>{{ $row[0] }}</span>
-                        <span class="font-mono text-[#2F5D46]">{{ $row[1] }} pcs</span>
-                    </div>
-                @endforeach
+                @forelse ($produkTerbaru as $produk)
+            <div class="ledger-row px-5 py-3 grid grid-cols-[1fr_auto] gap-3 text-sm items-center">
+                <span>{{ $produk->nama }}</span>
+                <span class="font-mono text-[var(--ink)]/70">{{ $produk->stok }} pcs</span>
+            </div>
+                @empty
+    <div class="px-5 py-3 text-sm text-[var(--ink)]/50 text-center">
+        Belum ada produk.
+    </div>
+@endforelse
             </div>
         </div>
     </main>

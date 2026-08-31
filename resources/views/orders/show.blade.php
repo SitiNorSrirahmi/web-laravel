@@ -53,7 +53,7 @@
                     </tfoot>
                 </table>
 
-                <a href="{{ route('orders.index') }}" class="inline-block mt-6 text-blue-600">← Kembali</a>
+                <a href="{{ route('orders.index') }}" class="inline-block mt-6 text-blue-600">Kembali</a>
 
             </div>
         </div>
