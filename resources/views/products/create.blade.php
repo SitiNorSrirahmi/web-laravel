@@ -9,7 +9,7 @@
         <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
 
-                <form action="{{ route('products.store') }}" method="POST" class="space-y-4">
+                <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
                     @csrf
 
                     <div>
@@ -34,6 +34,12 @@
                         <label class="block font-medium text-sm text-gray-700">Stok</label>
                         <input type="number" name="stok" value="{{ old('stok') }}" class="border-gray-300 rounded-md w-full">
                         @error('stok') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
+                    </div>
+
+                     <div>
+                        <label class="block font-medium text-sm text-gray-700">Gambar Produk</label>
+                        <input type="file" name="gambar" class="border-gray-300 rounded-md w-full">
+                         @error('gambar') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
                     </div>
 
                     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Simpan</button>
