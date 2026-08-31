@@ -22,6 +22,7 @@
                 <table class="w-full border-collapse">
                     <thead>
                         <tr class="bg-gray-100 text-left">
+                            <th class="p-2 border">Gambar</th>
                             <th class="p-2 border">Nama</th>
                             <th class="p-2 border">Harga</th>
                             <th class="p-2 border">Stok</th>
@@ -31,6 +32,13 @@
                     <tbody>
                         @forelse ($products as $product)
                             <tr class="border-b">
+                                 <td class="p-2 border">
+                                    @if ($product->getFirstMediaUrl('images'))
+                                        <img src="{{ $product->getFirstMediaUrl('images') }}" class="w-16 h-16 object-cover rounded">
+                                    @else
+                                        <span class="text-gray-400 text-xs">Tidak ada gambar</span>
+                                    @endif
+                            </td>
                                 <td class="p-2 border">{{ $product->nama }}</td>
                                 <td class="p-2 border">Rp{{ number_format($product->harga) }}</td>
                                 <td class="p-2 border">{{ $product->stok }}</td>
@@ -46,7 +54,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" class="p-2 text-center">Belum ada data produk.</td>
+                                <td colspan="5" class="p-2 text-center">Belum ada data produk.</td>
                             </tr>
                         @endforelse
                     </tbody>
